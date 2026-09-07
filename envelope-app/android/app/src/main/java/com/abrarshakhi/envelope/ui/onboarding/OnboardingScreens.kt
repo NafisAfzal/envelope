@@ -203,6 +203,7 @@ private fun SetupStepScreen(
     body: String,
     onDone: () -> Unit,
     onBack: () -> Unit,
+    onSkip: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     FlowScreen(
@@ -210,40 +211,60 @@ private fun SetupStepScreen(
         body = body,
         primaryLabel = "Done",
         onPrimary = onDone,
+        secondaryLabel = "Skip",
+        onSecondary = onSkip,
         onBack = onBack,
         modifier = modifier,
     )
 }
 
 @Composable
-fun AdminSetupScreen(onDone: () -> Unit, onBack: () -> Unit, modifier: Modifier = Modifier) {
+fun AdminSetupScreen(
+    onDone: () -> Unit,
+    onBack: () -> Unit,
+    onSkip: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     SetupStepScreen(
         title = "Administrator setup",
         body = "Identify the person whose safety plan this device holds. Details will be added later.",
         onDone = onDone,
         onBack = onBack,
+        onSkip = onSkip,
         modifier = modifier,
     )
 }
 
 @Composable
-fun ContactsSetupScreen(onDone: () -> Unit, onBack: () -> Unit, modifier: Modifier = Modifier) {
+fun ContactsSetupScreen(
+    onDone: () -> Unit,
+    onBack: () -> Unit,
+    onSkip: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     SetupStepScreen(
         title = "Emergency contacts",
         body = "Add the trusted people an emergency release can reach. Contact management will be added later.",
         onDone = onDone,
         onBack = onBack,
+        onSkip = onSkip,
         modifier = modifier,
     )
 }
 
 @Composable
-fun PermissionsSetupScreen(onDone: () -> Unit, onBack: () -> Unit, modifier: Modifier = Modifier) {
+fun PermissionsSetupScreen(
+    onDone: () -> Unit,
+    onBack: () -> Unit,
+    onSkip: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     SetupStepScreen(
         title = "Permissions",
         body = "Review the device permissions Aegis SOS needs, and when each one is used.",
         onDone = onDone,
         onBack = onBack,
+        onSkip = onSkip,
         modifier = modifier,
     )
 }
@@ -252,6 +273,7 @@ fun PermissionsSetupScreen(onDone: () -> Unit, onBack: () -> Unit, modifier: Mod
 fun UnlockPasswordSetupScreen(
     onDone: () -> Unit,
     onBack: () -> Unit,
+    onSkip: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     SetupStepScreen(
@@ -259,6 +281,7 @@ fun UnlockPasswordSetupScreen(
         body = "Choose the password that unlocks the app on this device. Entry fields will be added later.",
         onDone = onDone,
         onBack = onBack,
+        onSkip = onSkip,
         modifier = modifier,
     )
 }
@@ -267,6 +290,7 @@ fun UnlockPasswordSetupScreen(
 fun SelfDestructSetupScreen(
     onDone: () -> Unit,
     onBack: () -> Unit,
+    onSkip: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     SetupStepScreen(
@@ -274,6 +298,7 @@ fun SelfDestructSetupScreen(
         body = "Choose the separate password reserved for emergency data removal. Entry fields will be added later.",
         onDone = onDone,
         onBack = onBack,
+        onSkip = onSkip,
         modifier = modifier,
     )
 }

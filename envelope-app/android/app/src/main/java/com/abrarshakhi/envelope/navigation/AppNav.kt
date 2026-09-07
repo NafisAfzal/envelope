@@ -55,30 +55,35 @@ fun EnvelopeApp(modifier: Modifier = Modifier) {
                     AdminSetupScreen(
                         onDone = { backStack.removeLastOrNull() },
                         onBack = { backStack.removeLastOrNull() },
+                        onSkip = { backStack.removeLastOrNull() },
                     )
                 }
                 is ContactsSetup -> NavEntry(key) {
                     ContactsSetupScreen(
                         onDone = { backStack.removeLastOrNull() },
                         onBack = { backStack.removeLastOrNull() },
+                        onSkip = { backStack.removeLastOrNull() },
                     )
                 }
                 is PermissionsSetup -> NavEntry(key) {
                     PermissionsSetupScreen(
                         onDone = { backStack.removeLastOrNull() },
                         onBack = { backStack.removeLastOrNull() },
+                        onSkip = { backStack.removeLastOrNull() },
                     )
                 }
                 is UnlockPasswordSetup -> NavEntry(key) {
                     UnlockPasswordSetupScreen(
                         onDone = { backStack.removeLastOrNull() },
                         onBack = { backStack.removeLastOrNull() },
+                        onSkip = { backStack.removeLastOrNull() },
                     )
                 }
                 is SelfDestructSetup -> NavEntry(key) {
                     SelfDestructSetupScreen(
                         onDone = { backStack.removeLastOrNull() },
                         onBack = { backStack.removeLastOrNull() },
+                        onSkip = { backStack.removeLastOrNull() },
                     )
                 }
                 is Dashboard -> NavEntry(key) {
