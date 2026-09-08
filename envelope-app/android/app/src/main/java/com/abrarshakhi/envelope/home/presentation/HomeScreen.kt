@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,7 +17,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -28,11 +26,15 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.abrarshakhi.envelope.R
 import com.abrarshakhi.envelope.common.navigation.AppRoute
 import com.abrarshakhi.envelope.common.ui.AppBottomNavigation
+import com.abrarshakhi.envelope.common.ui.SettingsListRow
 
 /**
  * S10 Home / Ready. Calm everyday home: orientation app bar,
@@ -109,7 +111,7 @@ private fun DmsModule() {
                 painter = painterResource(R.drawable.ic_schedule),
                 contentDescription = null,
                 modifier = Modifier.size(28.dp),
-                colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
+                colorFilter = ColorFilter.tint(
                     MaterialTheme.colorScheme.onSecondaryContainer,
                 ),
             )
@@ -152,29 +154,26 @@ private fun ReadinessSummary(onNavigate: (AppRoute) -> Unit) {
                 Text(text = "Review setup")
             }
         }
-        ReadinessRow(
+        SettingsListRow(
             label = "Contacts",
-            status = "Not configured",
-            statusTone = StatusTone.ATTENTION,
+            supporting = "Not configured",
             iconRes = R.drawable.ic_group,
-            route = AppRoute.ContactsSetup,
-            onNavigate = onNavigate,
+            onClick = { onNavigate(AppRoute.ContactsSetup) },
+            supportingColor = statusColor(StatusTone.ATTENTION),
         )
-        ReadinessRow(
+        SettingsListRow(
             label = "Evidence",
-            status = "Not configured",
-            statusTone = StatusTone.ATTENTION,
-            iconRes = R.drawable.ic_folder,
-            route = AppRoute.Evidence,
-            onNavigate = onNavigate,
+            supporting = "Not configured",
+            iconRes = R.drawable.ic_description,
+            onClick = { onNavigate(AppRoute.Evidence) },
+            supportingColor = statusColor(StatusTone.ATTENTION),
         )
-        ReadinessRow(
+        SettingsListRow(
             label = "Permissions",
-            status = "Review in setup",
-            statusTone = StatusTone.ATTENTION,
+            supporting = "Review in setup",
             iconRes = R.drawable.ic_verified_user,
-            route = AppRoute.PermissionsSetup,
-            onNavigate = onNavigate,
+            onClick = { onNavigate(AppRoute.PermissionsSetup) },
+            supportingColor = statusColor(StatusTone.ATTENTION),
         )
     }
 }
@@ -182,64 +181,10 @@ private fun ReadinessSummary(onNavigate: (AppRoute) -> Unit) {
 enum class StatusTone { ATTENTION, READY, INFO }
 
 @Composable
-private fun statusColor(tone: StatusTone) = when (tone) {
+internal fun statusColor(tone: StatusTone) = when (tone) {
     StatusTone.ATTENTION -> com.abrarshakhi.envelope.common.ui.theme.AttentionDark
     StatusTone.READY -> com.abrarshakhi.envelope.common.ui.theme.SuccessDark
     StatusTone.INFO -> com.abrarshakhi.envelope.common.ui.theme.InfoDark
-}
-
-@Composable
-private fun ReadinessRow(
-    label: String,
-    status: String,
-    statusTone: StatusTone,
-    iconRes: Int,
-    route: AppRoute,
-    onNavigate: (AppRoute) -> Unit,
-) {
-    Surface(
-        onClick = { onNavigate(route) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(min = 72.dp),
-        shape = MaterialTheme.shapes.large,
-        color = MaterialTheme.colorScheme.surfaceVariant,
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Image(
-                painter = painterResource(iconRes),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(
-                    MaterialTheme.colorScheme.secondary,
-                ),
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = label,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurface,
-                )
-                Text(
-                    text = status,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = statusColor(statusTone),
-                )
-            }
-            Icon(
-                painter = painterResource(R.drawable.ic_chevron_right),
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(24.dp),
-            )
-        }
-    }
 }
 
 @Composable
@@ -255,19 +200,21 @@ private fun SosAction() {
     ) {
         Column(
             modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
+                Image(
                     painter = painterResource(R.drawable.ic_emergency),
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.error,
                     modifier = Modifier.size(28.dp),
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Text(
                     text = "Emergency",
-                    style = MaterialTheme.typography.labelLarge,
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Medium,
+                    letterSpacing = 1.5.sp,
                     color = MaterialTheme.colorScheme.onErrorContainer,
                 )
             }
@@ -276,7 +223,7 @@ private fun SosAction() {
                 enabled = false,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(min = 56.dp),
+                    .heightIn(min = 60.dp),
                 shape = MaterialTheme.shapes.large,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.error,
@@ -287,12 +234,13 @@ private fun SosAction() {
             ) {
                 Text(
                     text = "Start SOS",
-                    style = MaterialTheme.typography.titleMedium,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.SemiBold,
                 )
             }
             Text(
-                text = "Emergency dispatch is not implemented in this build. " +
-                    "Nothing is sent from this screen.",
+                text = "Tap to begin emergency activation. Dispatch is not " +
+                    "implemented in this build — nothing is sent.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f),
             )
