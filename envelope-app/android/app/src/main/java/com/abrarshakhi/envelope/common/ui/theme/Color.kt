@@ -58,3 +58,34 @@ val OnMineralSurfaceDark = Color(0xFFE1E3E0)
 val SurfaceVariantDark = Color(0xFF3F4946)
 val OnSurfaceVariantDark = Color(0xFFBEC9C5)
 val OutlineDark = Color(0xFF89938E)
+
+// Semantic status colors. Each color has a meaning:
+// teal = brand/primary, indigo = secondary interactive,
+// green = genuinely ready, amber = needs attention,
+// blue = informational, coral = emergency/destructive.
+val SuccessLight = Color(0xFF2E6B3E)
+val OnSuccessLight = Color(0xFFFFFFFF)
+val SuccessContainerLight = Color(0xFFB9F0C7)
+val OnSuccessContainerLight = Color(0xFF00210A)
+val SuccessDark = Color(0xFF8FD8A0)
+val OnSuccessDark = Color(0xFF00210A)
+val SuccessContainerDark = Color(0xFF1D4A28)
+val OnSuccessContainerDark = Color(0xFFB9F0C7)
+
+val AttentionLight = Color(0xFF8A5A00)
+val OnAttentionLight = Color(0xFFFFFFFF)
+val AttentionContainerLight = Color(0xFFFFE08C)
+val OnAttentionContainerLight = Color(0xFF2B1A00)
+val AttentionDark = Color(0xFFF5C26B)
+val OnAttentionDark = Color(0xFF2B1A00)
+val AttentionContainerDark = Color(0xFF4E3400)
+val OnAttentionContainerDark = Color(0xFFFFE08C)
+
+val InfoLight = Color(0xFF2F5D8F)
+val OnInfoLight = Color(0xFFFFFFFF)
+val InfoContainerLight = Color(0xFFD3E3FF)
+val OnInfoContainerLight = Color(0xFF001C36)
+val InfoDark = Color(0xFFA6C8EF)
+val OnInfoDark = Color(0xFF001C36)
+val InfoContainerDark = Color(0xFF274668)
+val OnInfoContainerDark = Color(0xFFD3E3FF)
