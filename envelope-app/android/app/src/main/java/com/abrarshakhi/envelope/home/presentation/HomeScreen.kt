@@ -67,8 +67,8 @@ fun HomeScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
-                .padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+                .padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             HomeHeading()
             DmsModule()
@@ -80,7 +80,7 @@ fun HomeScreen(
 
 @Composable
 private fun HomeHeading() {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Text(
             text = "Ready when you need it.",
             style = MaterialTheme.typography.headlineSmall,
@@ -104,7 +104,7 @@ private fun DmsModule() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(horizontal = 20.dp, vertical = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
@@ -135,7 +135,7 @@ private fun DmsModule() {
 
 @Composable
 private fun ReadinessSummary(onNavigate: (AppRoute) -> Unit) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -199,8 +199,8 @@ private fun SosAction() {
         ),
     ) {
         Column(
-            modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(

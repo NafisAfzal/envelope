@@ -41,14 +41,14 @@ fun SettingsListRow(
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 72.dp),
+            .heightIn(min = 64.dp),
         shape = MaterialTheme.shapes.large,
         color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(

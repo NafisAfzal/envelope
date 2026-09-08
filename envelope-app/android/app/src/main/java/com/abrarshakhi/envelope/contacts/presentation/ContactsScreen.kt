@@ -47,9 +47,15 @@ fun ContactsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 24.dp),
+                .padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
+            Text(
+                text = "The people your emergency plan can reach when " +
+                    "evidence is released.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
             EmptyState(
                 iconRes = R.drawable.ic_group,
                 heading = "Your emergency contacts will appear here.",

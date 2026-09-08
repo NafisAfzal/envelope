@@ -47,9 +47,15 @@ fun EvidenceScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 24.dp),
+                .padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
+            Text(
+                text = "Encrypted evidence packages captured during an " +
+                    "emergency are listed here.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
             EmptyState(
                 iconRes = R.drawable.ic_description,
                 heading = "Your protected evidence will appear here.",
