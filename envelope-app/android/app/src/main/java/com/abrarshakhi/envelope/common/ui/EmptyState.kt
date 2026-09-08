@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,11 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.abrarshakhi.envelope.common.ui.theme.aegisSurfaces
 
 /**
- * Shared empty-state pattern: semantic icon in a soft tonal circle,
- * short heading, one concise explanation. Used by Evidence and
- * Contacts so secondary pages belong to the same design system.
+ * Shared empty-state pattern: semantic icon in a soft tonal
+ * container, short heading, one concise explanation. Used by
+ * Evidence and Contacts so secondary pages belong to the same
+ * design system and communicate purpose, not "no data".
  */
 @Composable
 fun EmptyState(
@@ -34,28 +36,28 @@ fun EmptyState(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.large,
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        shape = RoundedCornerShape(24.dp),
+        color = MaterialTheme.aegisSurfaces.muted,
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 32.dp),
+                .padding(horizontal = 24.dp, vertical = 36.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Surface(
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.secondaryContainer,
-                modifier = Modifier.size(64.dp),
+                shape = RoundedCornerShape(20.dp),
+                color = MaterialTheme.colorScheme.tertiaryContainer,
+                modifier = Modifier.size(72.dp),
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Image(
                         painter = painterResource(iconRes),
                         contentDescription = null,
-                        modifier = Modifier.size(32.dp),
+                        modifier = Modifier.size(36.dp),
                         colorFilter = ColorFilter.tint(
-                            MaterialTheme.colorScheme.onSecondaryContainer,
+                            MaterialTheme.colorScheme.onTertiaryContainer,
                         ),
                     )
                 }
@@ -64,6 +66,7 @@ fun EmptyState(
                 text = heading,
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Medium,
+                lineHeight = 24.sp,
                 color = MaterialTheme.colorScheme.onSurface,
             )
             Text(

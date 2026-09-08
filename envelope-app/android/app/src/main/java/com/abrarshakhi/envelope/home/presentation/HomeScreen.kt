@@ -12,16 +12,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,13 +36,17 @@ import com.abrarshakhi.envelope.R
 import com.abrarshakhi.envelope.common.navigation.AppRoute
 import com.abrarshakhi.envelope.common.ui.AppBottomNavigation
 import com.abrarshakhi.envelope.common.ui.SettingsListRow
+import com.abrarshakhi.envelope.common.ui.theme.aegisSurfaces
+import com.abrarshakhi.envelope.common.ui.theme.AccentPlumDark
+import com.abrarshakhi.envelope.common.ui.theme.AccentPlumLight
+import androidx.compose.foundation.isSystemInDarkTheme
 
 /**
- * S10 Home / Ready. Calm everyday home: orientation app bar,
+ * S10 Home / Ready. Calm everyday home: prominent Aegis SOS brand,
  * readiness heading, the Dead Man's Switch as the primary module, a
- * compact readiness summary, and a visually isolated SOS action.
- * All configuration lives behind Settings. Nothing here pretends to
- * be a live backend capability.
+ * grouped readiness list, and a visually isolated SOS action. All
+ * configuration lives behind Settings. Nothing here pretends to be
+ * a live backend capability.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,10 +56,11 @@ fun HomeScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "Aegis SOS") },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            TopAppBar(
+                title = { Text(text = "Emergency readiness") },
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 ),
             )
         },
@@ -81,10 +87,18 @@ fun HomeScreen(
 @Composable
 private fun HomeHeading() {
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = "Aegis SOS",
+                style = MaterialTheme.typography.headlineMedium,
+                color = if (isSystemInDarkTheme()) AccentPlumDark else AccentPlumLight,
+            )
+        }
         Text(
             text = "Ready when you need it.",
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.padding(top = 2.dp),
         )
         Text(
             text = "Your emergency plan at a glance.",
@@ -98,13 +112,13 @@ private fun HomeHeading() {
 private fun DmsModule() {
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.large,
-        color = MaterialTheme.colorScheme.secondaryContainer,
+        shape = RoundedCornerShape(24.dp),
+        color = MaterialTheme.colorScheme.tertiaryContainer,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 14.dp),
+                .padding(horizontal = 20.dp, vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
@@ -112,7 +126,7 @@ private fun DmsModule() {
                 contentDescription = null,
                 modifier = Modifier.size(28.dp),
                 colorFilter = ColorFilter.tint(
-                    MaterialTheme.colorScheme.onSecondaryContainer,
+                    MaterialTheme.colorScheme.onTertiaryContainer,
                 ),
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -120,13 +134,13 @@ private fun DmsModule() {
                 Text(
                     text = "Dead Man's Switch",
                     style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                 )
                 Text(
                     text = "Not configured — check-in scheduling arrives in a " +
                         "future update.",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f),
+                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.75f),
                 )
             }
         }
@@ -189,13 +203,19 @@ internal fun statusColor(tone: StatusTone) = when (tone) {
 
 @Composable
 private fun SosAction() {
+    val dark = isSystemInDarkTheme()
+    val heroColor = if (dark) {
+        MaterialTheme.aegisSurfaces.emergencyDeep
+    } else {
+        com.abrarshakhi.envelope.common.ui.theme.EmergencyDeepLight
+    }
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.large,
-        color = MaterialTheme.colorScheme.errorContainer,
+        shape = RoundedCornerShape(24.dp),
+        color = heroColor,
         border = androidx.compose.foundation.BorderStroke(
             width = 1.dp,
-            color = MaterialTheme.colorScheme.error.copy(alpha = 0.4f),
+            color = MaterialTheme.colorScheme.error.copy(alpha = 0.45f),
         ),
     ) {
         Column(
@@ -224,11 +244,11 @@ private fun SosAction() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .heightIn(min = 60.dp),
-                shape = MaterialTheme.shapes.large,
+                shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.error,
                     contentColor = MaterialTheme.colorScheme.onError,
-                    disabledContainerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.55f),
+                    disabledContainerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.6f),
                     disabledContentColor = MaterialTheme.colorScheme.onError,
                 ),
             ) {

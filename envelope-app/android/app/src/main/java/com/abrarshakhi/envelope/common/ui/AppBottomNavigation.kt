@@ -82,7 +82,7 @@ fun AppBottomNavigation(
 @Composable
 private fun navColors() = NavigationBarItemDefaults.colors(
     selectedTextColor = MaterialTheme.colorScheme.primary,
-    selectedIconColor = MaterialTheme.colorScheme.primary,
+    selectedIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
     indicatorColor = MaterialTheme.colorScheme.secondaryContainer,

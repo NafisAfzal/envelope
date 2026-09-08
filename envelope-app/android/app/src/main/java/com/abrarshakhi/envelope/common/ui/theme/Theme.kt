@@ -8,7 +8,30 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
+
+/**
+ * Extended Aegis surface tokens that Material 3 has no slot for.
+ * Components read these for tonal layering (elevated/muted surfaces)
+ * so screens gain depth without extra colors per screen.
+ */
+data class AegisSurfaces(
+    val elevated: androidx.compose.ui.graphics.Color,
+    val muted: androidx.compose.ui.graphics.Color,
+    val emergencyDeep: androidx.compose.ui.graphics.Color,
+)
+
+val LocalAegisSurfaces = staticCompositionLocalOf {
+    AegisSurfaces(
+        elevated = SurfaceElevatedDark,
+        muted = SurfaceMutedDark,
+        emergencyDeep = EmergencyDeepDark,
+    )
+}
+
+val MaterialTheme.aegisSurfaces: AegisSurfaces
+    @Composable get() = LocalAegisSurfaces.current
 
 private val LightColorScheme = lightColorScheme(
     primary = PrimaryLight,
@@ -62,6 +85,18 @@ private val DarkColorScheme = darkColorScheme(
     outline = OutlineDark,
 )
 
+private val LightAegisSurfaces = AegisSurfaces(
+    elevated = SurfaceElevatedLight,
+    muted = SurfaceMutedLight,
+    emergencyDeep = EmergencyDeepLight,
+)
+
+private val DarkAegisSurfaces = AegisSurfaces(
+    elevated = SurfaceElevatedDark,
+    muted = SurfaceMutedDark,
+    emergencyDeep = EmergencyDeepDark,
+)
+
 @Composable
 fun EnvelopeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -80,9 +115,13 @@ fun EnvelopeTheme(
         else -> LightColorScheme
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    androidx.compose.runtime.CompositionLocalProvider(
+        LocalAegisSurfaces provides if (darkTheme) DarkAegisSurfaces else LightAegisSurfaces,
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }

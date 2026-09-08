@@ -1,6 +1,7 @@
 package com.abrarshakhi.envelope.common.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,11 +25,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.abrarshakhi.envelope.R
+import com.abrarshakhi.envelope.common.ui.theme.aegisSurfaces
 
 /**
  * Shared list-row language for readiness and settings items:
- * semantic icon, strong left-aligned primary label, muted secondary
- * status, and a chevron affordance. One visual system across screens.
+ * semantic icon in a soft tonal chip, strong left-aligned primary
+ * label, muted secondary status, and a chevron affordance. One
+ * visual system across screens.
  */
 @Composable
 fun SettingsListRow(
@@ -36,6 +40,7 @@ fun SettingsListRow(
     iconRes: Int,
     onClick: () -> Unit,
     supportingColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
 ) {
     Surface(
         onClick = onClick,
@@ -43,21 +48,16 @@ fun SettingsListRow(
             .fillMaxWidth()
             .heightIn(min = 64.dp),
         shape = MaterialTheme.shapes.large,
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        color = containerColor,
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 10.dp),
+                .padding(horizontal = 12.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Image(
-                painter = painterResource(iconRes),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary),
-            )
-            Spacer(modifier = Modifier.width(16.dp))
+            IconChip(iconRes = iconRes)
+            Spacer(modifier = Modifier.width(14.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = label,
@@ -79,6 +79,34 @@ fun SettingsListRow(
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(24.dp),
+            )
+        }
+    }
+}
+
+/**
+ * Soft tonal chip that groups the row icon with its label. Uses the
+ * elevated surface token so the chip reads as a deliberate layer,
+ * not a decorative circle.
+ */
+@Composable
+fun IconChip(
+    iconRes: Int,
+    modifier: Modifier = Modifier,
+    tint: Color = MaterialTheme.colorScheme.secondary,
+    chipColor: Color = MaterialTheme.aegisSurfaces.elevated,
+) {
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = chipColor,
+        modifier = modifier.size(40.dp),
+    ) {
+        Box(contentAlignment = Alignment.Center) {
+            Image(
+                painter = painterResource(iconRes),
+                contentDescription = null,
+                modifier = Modifier.size(22.dp),
+                colorFilter = ColorFilter.tint(tint),
             )
         }
     }
