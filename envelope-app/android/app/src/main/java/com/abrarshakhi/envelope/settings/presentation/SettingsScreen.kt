@@ -60,7 +60,7 @@ fun SettingsScreen(
                 .padding(start = 24.dp, end = 24.dp, top = 4.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            SettingsSectionLabel(text = "Safety setup")
+            SettingsSectionLabel(text = "Safety setup", accent = MaterialTheme.colorScheme.primary)
             SettingsGroup {
                 SettingsListRow(
                     label = "Administration",
@@ -68,6 +68,7 @@ fun SettingsScreen(
                     iconRes = R.drawable.ic_contact_phone,
                     onClick = { onOpenSetup(AppRoute.AdminSetup) },
                     containerColor = Color.Transparent,
+                    iconTint = MaterialTheme.colorScheme.primary,
                 )
                 SettingsListRow(
                     label = "Emergency contacts",
@@ -75,6 +76,7 @@ fun SettingsScreen(
                     iconRes = R.drawable.ic_group,
                     onClick = { onOpenSetup(AppRoute.ContactsSetup) },
                     containerColor = Color.Transparent,
+                    iconTint = MaterialTheme.colorScheme.primary,
                 )
                 SettingsListRow(
                     label = "Permissions",
@@ -82,9 +84,10 @@ fun SettingsScreen(
                     iconRes = R.drawable.ic_verified_user,
                     onClick = { onOpenSetup(AppRoute.PermissionsSetup) },
                     containerColor = Color.Transparent,
+                    iconTint = MaterialTheme.colorScheme.primary,
                 )
             }
-            SettingsSectionLabel(text = "Security")
+            SettingsSectionLabel(text = "Security", accent = MaterialTheme.colorScheme.tertiary)
             SettingsGroup {
                 SettingsListRow(
                     label = "App unlock password",
@@ -92,6 +95,7 @@ fun SettingsScreen(
                     iconRes = R.drawable.ic_settings,
                     onClick = { onOpenSetup(AppRoute.UnlockPasswordSetup) },
                     containerColor = Color.Transparent,
+                    iconTint = MaterialTheme.colorScheme.tertiary,
                 )
                 SettingsListRow(
                     label = "Self-destruct password",
@@ -99,6 +103,7 @@ fun SettingsScreen(
                     iconRes = R.drawable.ic_emergency,
                     onClick = { onOpenSetup(AppRoute.SelfDestructSetup) },
                     containerColor = Color.Transparent,
+                    iconTint = MaterialTheme.colorScheme.tertiary,
                 )
             }
         }
@@ -106,21 +111,23 @@ fun SettingsScreen(
 }
 
 @Composable
-private fun SettingsSectionLabel(text: String) {
+private fun SettingsSectionLabel(text: String, accent: Color) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelLarge,
-        color = MaterialTheme.colorScheme.primary,
+        color = accent,
         modifier = Modifier.padding(start = 4.dp, top = 6.dp),
     )
 }
 
 @Composable
 private fun SettingsGroup(content: @Composable () -> Unit) {
+    // Slightly elevated tonal group with a hairline top highlight,
+    // giving the section a refined layered feel without shadows.
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
-        color = MaterialTheme.aegisSurfaces.muted,
+        color = MaterialTheme.aegisSurfaces.elevated,
     ) {
         Column(
             modifier = Modifier.padding(8.dp),

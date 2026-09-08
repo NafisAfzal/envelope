@@ -37,7 +37,7 @@ fun EmptyState(
     Surface(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
-        color = MaterialTheme.aegisSurfaces.muted,
+        color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
         Column(
             modifier = Modifier
@@ -67,13 +67,13 @@ fun EmptyState(
                 fontSize = 17.sp,
                 fontWeight = FontWeight.Medium,
                 lineHeight = 24.sp,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = MaterialTheme.aegisSurfaces.textPrimary,
             )
             Text(
                 text = explanation,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.aegisSurfaces.textSecondary,
                 modifier = Modifier.fillMaxWidth(),
             )
         }

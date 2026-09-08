@@ -51,36 +51,52 @@ val OnAccentPlumDark = Color(0xFF3A1130)
 val AccentPlumContainerDark = Color(0xFF4A2A41)
 val OnAccentPlumContainerDark = Color(0xFFFFD7EF)
 
-// ---- Error / emergency — controlled coral ----
+// ---- Error / emergency — rich crimson family ----
 val ErrorLight = Color(0xFFBB2E24)
 val OnErrorLight = Color(0xFFFFFFFF)
 val ErrorContainerLight = Color(0xFFFFDAD4)
 val OnErrorContainerLight = Color(0xFF410002)
 val ErrorDark = Color(0xFFFFB4A8)
 val OnErrorDark = Color(0xFF690002)
-val ErrorContainerDark = Color(0xFF5C1410)
-val OnErrorContainerDark = Color(0xFFFFDAD4)
+val ErrorContainerDark = Color(0xFF5C2432)
+val OnErrorContainerDark = Color(0xFFFFD9DE)
 
-// ---- Deep emergency surface (SOS hero) ----
-val EmergencyDeepDark = Color(0xFF4A100D)
-val EmergencyDeepLight = Color(0xFFFCE4DF)
+// ---- Emergency hero — deep crimson to rich burgundy ----
+// Layered for depth: base crimson, burgundy blend, coral CTA,
+// warm rose highlight, warm ivory text.
+val EmergencyCrimsonDark = Color(0xFF4E1425)
+val EmergencyBurgundyDark = Color(0xFF6E1F33)
+val EmergencyCoralDark = Color(0xFFE85D66)
+val EmergencyOnCoralDark = Color(0xFF2B0A10)
+val EmergencyRoseDark = Color(0xFFF2A9B0)
+val EmergencyIvoryDark = Color(0xFFF5EFE6)
+val EmergencyCrimsonLight = Color(0xFF6E1F2B)
+val EmergencyBurgundyLight = Color(0xFF8A2B3D)
+val EmergencyCoralLight = Color(0xFFC93A46)
+val EmergencyOnCoralLight = Color(0xFFFFF3F0)
+val EmergencyRoseLight = Color(0xFFB76E79)
+val EmergencyIvoryLight = Color(0xFFFFF6F2)
 
-// ---- Base — warm mineral light / midnight mineral dark ----
+// ---- Base — warm mineral light / midnight navy dark ----
 val MineralSurfaceLight = Color(0xFFFAF7F1)
-val OnMineralSurfaceLight = Color(0xFF1B1C1E)
-val SurfaceElevatedLight = Color(0xFFFFFFFF)
+val OnMineralSurfaceLight = Color(0xFF1B1C22)
+val SurfaceElevatedLight = Color(0xFFFFFDFA)
 val SurfaceMutedLight = Color(0xFFEDE9E1)
 val SurfaceVariantLight = Color(0xFFE7E4DC)
 val OnSurfaceVariantLight = Color(0xFF444B49)
 val OutlineLight = Color(0xFF747C79)
+val TextSecondaryLight = Color(0xFF5A6270)
+val TextTertiaryLight = Color(0xFF8A93A3)
 
-val MineralSurfaceDark = Color(0xFF10151B)
-val OnMineralSurfaceDark = Color(0xFFE3E1DC)
-val SurfaceElevatedDark = Color(0xFF1A212B)
-val SurfaceMutedDark = Color(0xFF151B22)
-val SurfaceVariantDark = Color(0xFF232B36)
-val OnSurfaceVariantDark = Color(0xFFB9C2C8)
+val MineralSurfaceDark = Color(0xFF0E1319)
+val OnMineralSurfaceDark = Color(0xFFF2EDE4)
+val SurfaceElevatedDark = Color(0xFF1B2430)
+val SurfaceMutedDark = Color(0xFF141A22)
+val SurfaceVariantDark = Color(0xFF233040)
+val OnSurfaceVariantDark = Color(0xFFA9B4C2)
 val OutlineDark = Color(0xFF89939E)
+val TextSecondaryDark = Color(0xFF9BA8B8)
+val TextTertiaryDark = Color(0xFF6E7A89)
 
 // ---- Semantic status ----
 val SuccessLight = Color(0xFF2E6B3E)

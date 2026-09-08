@@ -12,21 +12,38 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 
 /**
- * Extended Aegis surface tokens that Material 3 has no slot for.
- * Components read these for tonal layering (elevated/muted surfaces)
- * so screens gain depth without extra colors per screen.
+ * Extended Aegis tokens that Material 3 has no slot for: tonal
+ * surface layers for depth, warm text tones for hierarchy, and the
+ * layered emergency (SOS) family. Screens compose depth from these
+ * instead of flat single colors.
  */
 data class AegisSurfaces(
     val elevated: androidx.compose.ui.graphics.Color,
     val muted: androidx.compose.ui.graphics.Color,
-    val emergencyDeep: androidx.compose.ui.graphics.Color,
+    val emergencyCrimson: androidx.compose.ui.graphics.Color,
+    val emergencyBurgundy: androidx.compose.ui.graphics.Color,
+    val emergencyCoral: androidx.compose.ui.graphics.Color,
+    val emergencyOnCoral: androidx.compose.ui.graphics.Color,
+    val emergencyRose: androidx.compose.ui.graphics.Color,
+    val emergencyIvory: androidx.compose.ui.graphics.Color,
+    val textPrimary: androidx.compose.ui.graphics.Color,
+    val textSecondary: androidx.compose.ui.graphics.Color,
+    val textTertiary: androidx.compose.ui.graphics.Color,
 )
 
 val LocalAegisSurfaces = staticCompositionLocalOf {
     AegisSurfaces(
         elevated = SurfaceElevatedDark,
         muted = SurfaceMutedDark,
-        emergencyDeep = EmergencyDeepDark,
+        emergencyCrimson = EmergencyCrimsonDark,
+        emergencyBurgundy = EmergencyBurgundyDark,
+        emergencyCoral = EmergencyCoralDark,
+        emergencyOnCoral = EmergencyOnCoralDark,
+        emergencyRose = EmergencyRoseDark,
+        emergencyIvory = EmergencyIvoryDark,
+        textPrimary = OnMineralSurfaceDark,
+        textSecondary = TextSecondaryDark,
+        textTertiary = TextTertiaryDark,
     )
 }
 
@@ -88,13 +105,29 @@ private val DarkColorScheme = darkColorScheme(
 private val LightAegisSurfaces = AegisSurfaces(
     elevated = SurfaceElevatedLight,
     muted = SurfaceMutedLight,
-    emergencyDeep = EmergencyDeepLight,
+    emergencyCrimson = EmergencyCrimsonLight,
+    emergencyBurgundy = EmergencyBurgundyLight,
+    emergencyCoral = EmergencyCoralLight,
+    emergencyOnCoral = EmergencyOnCoralLight,
+    emergencyRose = EmergencyRoseLight,
+    emergencyIvory = EmergencyIvoryLight,
+    textPrimary = OnMineralSurfaceLight,
+    textSecondary = TextSecondaryLight,
+    textTertiary = TextTertiaryLight,
 )
 
 private val DarkAegisSurfaces = AegisSurfaces(
     elevated = SurfaceElevatedDark,
     muted = SurfaceMutedDark,
-    emergencyDeep = EmergencyDeepDark,
+    emergencyCrimson = EmergencyCrimsonDark,
+    emergencyBurgundy = EmergencyBurgundyDark,
+    emergencyCoral = EmergencyCoralDark,
+    emergencyOnCoral = EmergencyOnCoralDark,
+    emergencyRose = EmergencyRoseDark,
+    emergencyIvory = EmergencyIvoryDark,
+    textPrimary = OnMineralSurfaceDark,
+    textSecondary = TextSecondaryDark,
+    textTertiary = TextTertiaryDark,
 )
 
 @Composable

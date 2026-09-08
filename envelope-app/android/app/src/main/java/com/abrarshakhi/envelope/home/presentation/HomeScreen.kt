@@ -1,7 +1,10 @@
 package com.abrarshakhi.envelope.home.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,6 +30,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,24 +40,25 @@ import androidx.compose.ui.unit.sp
 import com.abrarshakhi.envelope.R
 import com.abrarshakhi.envelope.common.navigation.AppRoute
 import com.abrarshakhi.envelope.common.ui.AppBottomNavigation
+import com.abrarshakhi.envelope.common.ui.IconChip
 import com.abrarshakhi.envelope.common.ui.SettingsListRow
-import com.abrarshakhi.envelope.common.ui.theme.aegisSurfaces
 import com.abrarshakhi.envelope.common.ui.theme.AccentPlumDark
 import com.abrarshakhi.envelope.common.ui.theme.AccentPlumLight
-import androidx.compose.foundation.isSystemInDarkTheme
+import com.abrarshakhi.envelope.common.ui.theme.aegisSurfaces
 
 /**
- * S10 Home / Ready. Calm everyday home: prominent Aegis SOS brand,
- * readiness heading, the Dead Man's Switch as the primary module, a
- * grouped readiness list, and a visually isolated SOS action. All
- * configuration lives behind Settings. Nothing here pretends to be
- * a live backend capability.
+ * S10 Home / Ready. Calm everyday home: prominent Aegis SOS brand
+ * hero, the Dead Man's Switch as the primary preparedness module, a
+ * grouped readiness list, and a rich layered emergency action. All
+ * configuration lives behind Settings. Nothing here pretends to be a
+ * live backend capability.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     onNavigate: (AppRoute) -> Unit = {},
 ) {
+    val s = MaterialTheme.aegisSurfaces
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -60,7 +66,7 @@ fun HomeScreen(
                 title = { Text(text = "Emergency readiness") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
-                    titleContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    titleContentColor = s.textTertiary,
                 ),
             )
         },
@@ -86,62 +92,72 @@ fun HomeScreen(
 
 @Composable
 private fun HomeHeading() {
+    val s = MaterialTheme.aegisSurfaces
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(
-                text = "Aegis SOS",
-                style = MaterialTheme.typography.headlineMedium,
-                color = if (isSystemInDarkTheme()) AccentPlumDark else AccentPlumLight,
-            )
-        }
+        Text(
+            text = "Aegis SOS",
+            style = MaterialTheme.typography.headlineMedium,
+            color = if (isSystemInDarkTheme()) AccentPlumDark else AccentPlumLight,
+        )
         Text(
             text = "Ready when you need it.",
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = s.textPrimary,
             modifier = Modifier.padding(top = 2.dp),
         )
         Text(
             text = "Your emergency plan at a glance.",
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = s.textSecondary,
         )
     }
 }
 
 @Composable
 private fun DmsModule() {
+    // Subtle indigo → sea-glass depth wash; nearly imperceptible,
+    // creating surface depth rather than decoration.
+    val gradient = Brush.linearGradient(
+        colors = listOf(
+            MaterialTheme.colorScheme.tertiaryContainer,
+            MaterialTheme.colorScheme.secondaryContainer,
+        ),
+    )
     Surface(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(24.dp),
-        color = MaterialTheme.colorScheme.tertiaryContainer,
+        color = Color.Transparent,
     ) {
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
+                .background(gradient, RoundedCornerShape(24.dp))
         ) {
-            Image(
-                painter = painterResource(R.drawable.ic_schedule),
-                contentDescription = null,
-                modifier = Modifier.size(28.dp),
-                colorFilter = ColorFilter.tint(
-                    MaterialTheme.colorScheme.onTertiaryContainer,
-                ),
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "Dead Man's Switch",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer,
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                IconChip(
+                    iconRes = R.drawable.ic_schedule,
+                    tint = MaterialTheme.colorScheme.tertiary,
+                    chipColor = Color.Transparent,
                 )
-                Text(
-                    text = "Not configured — check-in scheduling arrives in a " +
-                        "future update.",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.75f),
-                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Dead Man's Switch",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer,
+                    )
+                    Text(
+                        text = "Not configured — check-in scheduling arrives in a " +
+                            "future update.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.75f),
+                    )
+                }
             }
         }
     }
@@ -149,6 +165,7 @@ private fun DmsModule() {
 
 @Composable
 private fun ReadinessSummary(onNavigate: (AppRoute) -> Unit) {
+    val s = MaterialTheme.aegisSurfaces
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Row(
             modifier = Modifier
@@ -159,7 +176,7 @@ private fun ReadinessSummary(onNavigate: (AppRoute) -> Unit) {
             Text(
                 text = "Readiness",
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onBackground,
+                color = s.textPrimary,
                 modifier = Modifier.weight(1f),
             )
             TextButton(
@@ -203,67 +220,80 @@ internal fun statusColor(tone: StatusTone) = when (tone) {
 
 @Composable
 private fun SosAction() {
-    val dark = isSystemInDarkTheme()
-    val heroColor = if (dark) {
-        MaterialTheme.aegisSurfaces.emergencyDeep
-    } else {
-        com.abrarshakhi.envelope.common.ui.theme.EmergencyDeepLight
-    }
+    val s = MaterialTheme.aegisSurfaces
+    // Layered emergency depth: deep crimson base flowing into rich
+    // burgundy. The coral CTA is the brightest element inside the
+    // region; text is warm ivory, never pure white.
+    val gradient = Brush.linearGradient(
+        colors = listOf(s.emergencyCrimson, s.emergencyBurgundy),
+    )
     Surface(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(24.dp),
-        color = heroColor,
+        shape = RoundedCornerShape(28.dp),
+        color = Color.Transparent,
         border = androidx.compose.foundation.BorderStroke(
             width = 1.dp,
-            color = MaterialTheme.colorScheme.error.copy(alpha = 0.45f),
+            color = s.emergencyRose.copy(alpha = 0.25f),
         ),
     ) {
-        Column(
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(gradient, RoundedCornerShape(28.dp))
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = painterResource(R.drawable.ic_emergency),
-                    contentDescription = null,
-                    modifier = Modifier.size(28.dp),
-                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.error),
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = "Emergency",
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.Medium,
-                    letterSpacing = 1.5.sp,
-                    color = MaterialTheme.colorScheme.onErrorContainer,
-                )
-            }
-            Button(
-                onClick = {},
-                enabled = false,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 60.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error,
-                    contentColor = MaterialTheme.colorScheme.onError,
-                    disabledContainerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.6f),
-                    disabledContentColor = MaterialTheme.colorScheme.onError,
-                ),
+            Column(
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 18.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
             ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_emergency),
+                        contentDescription = null,
+                        modifier = Modifier.size(28.dp),
+                        colorFilter = ColorFilter.tint(s.emergencyRose),
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "EMERGENCY",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        letterSpacing = 2.sp,
+                        color = s.emergencyRose,
+                    )
+                }
                 Text(
-                    text = "Start SOS",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.SemiBold,
+                    text = "If you are in danger, starting SOS begins " +
+                        "emergency activation.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = s.emergencyIvory.copy(alpha = 0.9f),
+                )
+                Button(
+                    onClick = {},
+                    enabled = false,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(min = 60.dp),
+                    shape = RoundedCornerShape(18.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = s.emergencyCoral,
+                        contentColor = s.emergencyOnCoral,
+                        disabledContainerColor = s.emergencyCoral.copy(alpha = 0.75f),
+                        disabledContentColor = s.emergencyOnCoral,
+                    ),
+                ) {
+                    Text(
+                        text = "Start SOS",
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                }
+                Text(
+                    text = "Dispatch is not implemented in this build — " +
+                        "nothing is sent.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = s.emergencyIvory.copy(alpha = 0.6f),
                 )
             }
-            Text(
-                text = "Tap to begin emergency activation. Dispatch is not " +
-                    "implemented in this build — nothing is sent.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f),
-            )
         }
     }
 }

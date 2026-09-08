@@ -41,6 +41,8 @@ fun SettingsListRow(
     onClick: () -> Unit,
     supportingColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     containerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
+    iconTint: Color = MaterialTheme.colorScheme.secondary,
+    iconChipColor: Color = MaterialTheme.aegisSurfaces.elevated,
 ) {
     Surface(
         onClick = onClick,
@@ -56,7 +58,11 @@ fun SettingsListRow(
                 .padding(horizontal = 12.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            IconChip(iconRes = iconRes)
+            IconChip(
+                iconRes = iconRes,
+                tint = iconTint,
+                chipColor = iconChipColor,
+            )
             Spacer(modifier = Modifier.width(14.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(

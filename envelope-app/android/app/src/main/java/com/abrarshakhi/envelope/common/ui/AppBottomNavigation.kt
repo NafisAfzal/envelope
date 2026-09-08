@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.abrarshakhi.envelope.R
 import com.abrarshakhi.envelope.common.navigation.AppRoute
+import com.abrarshakhi.envelope.common.ui.theme.aegisSurfaces
 
 /**
  * Shared bottom navigation for top-level destinations, using the
@@ -26,7 +27,7 @@ fun AppBottomNavigation(
     onNavigate: (AppRoute) -> Unit,
 ) {
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = MaterialTheme.aegisSurfaces.elevated,
     ) {
         NavigationBarItem(
             selected = current == AppRoute.Home,
