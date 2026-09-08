@@ -8,7 +8,10 @@ import com.abrarshakhi.envelope.common.navigation.AppRoute.ContactsSetup
 import com.abrarshakhi.envelope.common.navigation.AppRoute.PermissionsSetup
 import com.abrarshakhi.envelope.common.navigation.AppRoute.SelfDestructSetup
 import com.abrarshakhi.envelope.common.navigation.AppRoute.UnlockPasswordSetup
+import com.abrarshakhi.envelope.contacts.presentation.ContactsScreen
+import com.abrarshakhi.envelope.evidence.presentation.EvidenceScreen
 import com.abrarshakhi.envelope.home.presentation.HomeScreen
+import com.abrarshakhi.envelope.settings.presentation.SettingsScreen
 import com.abrarshakhi.envelope.onboarding.AdminSetupScreen
 import com.abrarshakhi.envelope.onboarding.ContactsSetupScreen
 import com.abrarshakhi.envelope.onboarding.OnboardingScreen
@@ -103,6 +106,31 @@ val navigationModule = module {
     }
 
     navigation<AppRoute.Home> {
-        HomeScreen()
+        val navigator = get<AppNavigator>()
+        HomeScreen(
+            onNavigate = { navigator.navigateTo(it) },
+        )
+    }
+
+    navigation<AppRoute.Evidence> {
+        val navigator = get<AppNavigator>()
+        EvidenceScreen(
+            onNavigate = { navigator.navigateTo(it) },
+        )
+    }
+
+    navigation<AppRoute.Contacts> {
+        val navigator = get<AppNavigator>()
+        ContactsScreen(
+            onNavigate = { navigator.navigateTo(it) },
+        )
+    }
+
+    navigation<AppRoute.Settings> {
+        val navigator = get<AppNavigator>()
+        SettingsScreen(
+            onOpenSetup = { navigator.navigateTo(it) },
+            onNavigate = { navigator.navigateTo(it) },
+        )
     }
 }

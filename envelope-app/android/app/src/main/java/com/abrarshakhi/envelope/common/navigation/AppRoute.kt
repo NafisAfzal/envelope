@@ -32,4 +32,13 @@ sealed interface AppRoute {
 
     @Serializable
     data object Home : AppRoute
+
+    @Serializable
+    data object Evidence : AppRoute
+
+    @Serializable
+    data object Contacts : AppRoute
+
+    @Serializable
+    data object Settings : AppRoute
 }
